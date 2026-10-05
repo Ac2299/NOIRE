@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIRÉ CLINIC | Advanced Medical & Aesthetic Care</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #080B0A;
+            --bg-card: rgba(18, 26, 23, 0.6);
+            --emerald-glow: #00F5A0;
+            --teal-accent: #0A5C46;
+            --champagne: #D4AF37;
+            --champagne-light: #F3E5AB;
+            --text-main: #E5E9E7;
+            --text-muted: #8A9A93;
+            --border-glass: rgba(212, 175, 55, 0.15);
+            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--teal-accent); border-radius: 4px; }
+
+        /* Floating Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(8, 11, 10, 0.75);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-glass);
+            transition: var(--transition-smooth);
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--champagne);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--champagne);
+        }
+
+        /* Floating Controls (Language & WhatsApp) */
+        .floating-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1001;
+        }
+
+        .float-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            color: var(--champagne);
+            padding: 12px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .float-btn:hover {
+            background: var(--champagne);
+            color: var(--bg-deep);
+            transform: translateY(-3px);
+        }
+
+        .whatsapp-float {
+            background: #25d366;
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background: #20ba5a;
+            color: white;
+        }
+
+        /* Hero Section */
+        header.hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, rgba(10,92,70,0.15) 0%, rgba(8,11,10,1) 70%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            letter-spacing: 6px;
+            color: var(--champagne);
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInSlide 1.2s forwards 0.3s;
+        }
+
+        .hero p.tagline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInSlide 1.2s forwards 0.6s;
+        }
+
+        .hero p.sub-tagline {
+            font-size: 1rem;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInSlide 1.2s forwards 0.9s;
+        }
+
+        .btn-primary {
+            background: transparent;
+            color: var(--champagne);
+            border: 1px solid var(--champagne);
+            padding: 15px 40px;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.4s;
+            text-decoration: none;
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInSlide 1.2s forwards 1.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--champagne);
+            color: var(--bg-deep);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        @keyframes fadeInSlide {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections General */
+        section {
+            padding: 100px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--champagne);
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+        }
+
+        /* Dark Glassmorphism Cards */
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 40px;
+            transition: 0.4s;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        /* Horizontal Gallery (Before / After - 8 Cases) */
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .gallery-track {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            padding-bottom: 20px;
+        }
+
+        .gallery-track::-webkit-scrollbar { display: none; }
+
+        .case-card {
+            flex: 0 0 350px;
+            scroll-snap-align: start;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .case-image-box {
+            height: 250px;
+            background: #111;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .case-info {
+            padding: 25px;
+        }
+
+        .case-info h3 {
+            font-size: 1.1rem;
+            color: var(--champagne);
+            margin-bottom: 8px;
+            font-family: 'Cinzel', serif;
+        }
+
+        .case-info p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Editorial Doctors Section */
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .doctor-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        .doctor-img {
+            height: 380px;
+            background: #131a17;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .doctor-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--champagne);
+            margin-bottom: 5px;
+        }
+
+        .doctor-card span {
+            color: var(--teal-accent);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Luxury Magazine Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            padding: 45px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: "“";
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 4rem;
+            color: var(--champagne);
+            opacity: 0.2;
+            font-family: 'Cinzel', serif;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            font-weight: 300;
+        }
+
+        .testimonial-author {
+            font-size: 0.9rem;
+            color: var(--champagne);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Dark Glass Booking Form */
+        .booking-section {
+            background: radial-gradient(circle at bottom, rgba(10,92,70,0.2) 0%, rgba(8,11,10,1) 80%);
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .booking-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            padding: 50px;
+            border-radius: 16px;
+            backdrop-filter: blur(25px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            color: var(--champagne);
+            text-transform: uppercase;
+        }
+
+        .form-control {
+            width: 100%;
+            background: rgba(8, 11, 10, 0.6);
+            border: 1px solid var(--border-glass);
+            padding: 15px;
+            color: var(--text-main);
+            border-radius: 6px;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--champagne);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--champagne);
+            color: var(--bg-deep);
+            border: none;
+            padding: 16px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--champagne-light);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media(max-width: 768px) {
+            nav { padding: 20px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            section { padding: 60px 20px; }
+            .booking-form { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Navbar -->
+    <nav>
+        <a href="#" class="logo">NOIRÉ</a>
+        <ul class="nav-links">
+            <li><a href="#gallery" data-en="Transformations" data-ar="النتائج">Transformations</a></li>
+            <li><a href="#doctors" data-en="Experts" data-ar="الخراء">Experts</a></li>
+            <li><a href="#testimonials" data-en="Journal" data-ar="المجلة">Journal</a></li>
+            <li><a href="#booking" data-en="Reservation" data-ar="الحجز">Reservation</a></li>
+        </ul>
+    </nav>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-controls">
+        <button class="float-btn" onclick="toggleLanguage()" id="langBtn">AR / EN</button>
+        <a href="https://wa.me/201500576313" target="_blank" class="whatsapp-float" title="WhatsApp Us">💬</a>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 data-en="NOIRÉ" data-ar="نوار">NOIRÉ</h1>
+            <p class="tagline" data-en="Where precision meets confidence." data-ar="حيث تلتقي الدقة بالثقة.">Where precision meets confidence.</p>
+            <p class="sub-tagline" data-en="Advanced Medical & Aesthetic Care" data-ar="رعاية طبية وتجميلية متقدمة">Advanced Medical & Aesthetic Care</p>
+            <a href="#booking" class="btn-primary" data-en="Book Consultation" data-ar="احجز استشارتك">Book Consultation</a>
+        </div>
+    </header>
+
+    <!-- Horizontal Gallery: 8 Cases -->
+    <section id="gallery">
+        <div class="section-title">
+            <h2 data-en="Clinical Transformations" data-ar="التحولات السريرية">Clinical Transformations</h2>
+            <p data-en="Explore 8 signature aesthetic and medical transformations" data-ar="استكشف 8 حالات تجميلية وعلاجية مميزة">Explore 8 signature aesthetic and medical transformations</p>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery-track">
+                <!-- Case 1 -->
+                <div class="case-card">
+                    <div class="case-image-box" data-en="Before / After 01" data-ar="قبل / بعد 01">Before / After 01</div>
+                    <div class="case-info">
+                        <h3 data-en="Facial Contouring" data-ar="تحديد الوجه">Facial Contouring</h3>
+                        <p data-en="Advanced structural harmonization" data-ar="تناسق هيكلي متقدم">Advanced structural harmonization</p>
+                    </div>
+                </div>
+                <!-- Case 2 -->
+                <div class="case-card">
+                    <div class="case-image-box" data-en="Before / After 02" data-ar="قبل / بعد 02">Before / After 02</div>
+                    <div class="case-info">
+                        <h3 data-en="Rhinoplasty" data-ar="تجميل الأنف">Rhinoplasty</h3>
+                        <p data-en="Precision surgical refinement" data-ar="تعديل جراحي دقيق">Precision surgical refinement</p>
+                    </div>
+                </div>
+                <!-- Case 3 -->
+                <div class="case-card">
+                    <div class="case-image-box" data-en="Before / After 03" data-ar="قبل / بعد 03">Before / After 03</div>
+                    <div class="case-info">
+                        <h3 data-en="Skin Rejuvenation" data-ar="تجديد شباب البشرة">Skin Rejuvenation</h3>
+                        <p data-en="Cellular regeneration therapy" data-ar="علاج تجديد الخلايا">Cellular regeneration therapy</p>
+                    </div>
+                </div>
+                <!-- Case 4 -->
+                <div class="case-card">
+                    <div class="case-image-box" data-en="Before / After 04" data-ar="قبل / بعد 04">Before / After 04</div>
+                    <div class="case-info">
+                        <h3 data-en="Mandibular Definition" data-ar="تحديد الفك">Mandibular Definition</h3>
+                        <p data-en="Non-surgical contouring" data-ar="نحت بدون جراحة">Non-surgical contouring</p>
+                    </div>
+                </div>
+                <!-- Case 5 -->
+                <div class="case-card">
+                    <div class="case-image-box" data-en="Before / After 05" data-ar="قبل / بعد 05">Before / After 05</div>
+                    <div class="case-info">
+                        <h3 data-en="Laser Resurfacing" data-ar="تقشير بالليزر">Laser Resurfacing</h3>
+                        <p data-en="Advanced texture restoration" data-ar="استعادة نعومة الملمس">Advanced texture restoration</p>
+                    </div>
+                </div>
+                <!-- Case 6 -->
+                <div class="case-card">
+                    <div class="case-image-box" data-en="Before / After 06" data-ar="قبل / بعد 06">Before / After 06</div>
+                    <div class="case-info">
+                        <h3 data-en="Anti-Aging Protocol" data-ar="بروتوكول مقاومة الشيخوخة">Anti-Aging Protocol</h3>
+                        <p data-en="Holistic dermal therapy" data-ar="علاج جلدي متكامل">Holistic dermal therapy</p>
+                    </div>
+                </div>
+                <!-- Case 7 -->
+                <div class="case-card">
+                    <div class="case-image-box" data-en="Before / After 07" data-ar="قبل / بعد 07">Before / After 07</div>
+                    <div class="case-info">
+                        <h3 data-en="Symptom Correction" data-ar="تصحيح طبي">Symptom Correction</h3>
+                        <p data-en="Dermatological precision" data-ar="دقة جلدية فائقة">Dermatological precision</p>
+                    </div>
+                </div>
+                <!-- Case 8 -->
+                <div class="case-card">
+                    <div class="case-image-box" data-en="Before / After 08" data-ar="قبل / بعد 08">Before / After 08</div>
+                    <div class="case-info">
+                        <h3 data-en="Signature Aesthetic" data-ar="تجميل استثنائي">Signature Aesthetic</h3>
+                        <p data-en="Customized luxury care" data-ar="عناية فاخرة مخصصة">Customized luxury care</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Editorial Doctors Section -->
+    <section id="doctors">
+        <div class="section-title">
+            <h2 data-en="Medical Board" data-en-ar="النخبة الطبية" data-ar="النخبة الطبية">Medical Board</h2>
+            <p data-en="World-class specialists dedicated to refined excellence" data-ar="نخبة من الاستشاريين المتخصصين لأعلى معايير التميز">World-class specialists dedicated to refined excellence</p>
+        </div>
+        <div class="doctors-grid">
+            <div class="doctor-card">
+                <div class="doctor-img" data-en="Dr. Alexander Vance" data-ar="د. ألكسندر فانس">Dr. Alexander Vance</div>
+                <h3 data-en="Dr. Alexander Vance" data-ar="د. ألكسندر فانس">Dr. Alexander Vance</h3>
+                <span data-en="Chief Aesthetic Surgeon" data-ar="استشاري جراحات التجميل">Chief Aesthetic Surgeon</span>
+            </div>
+            <div class="doctor-card">
+                <div class="doctor-img" data-en="Dr. Elena Rostova" data-ar="د. إلينا روستوفا">Dr. Elena Rostova</div>
+                <h3 data-en="Dr. Elena Rostova" data-ar="د. إلينا روستوفا">Dr. Elena Rostova</h3>
+                <span data-en="Dermatology & Laser Specialist" data-ar="أخصائية الجلدية والليزر">Dermatology & Laser Specialist</span>
+            </div>
+            <div class="doctor-card">
+                <div class="doctor-img" data-en="Dr. Julian Sterling" data-ar="د. جوليان ستيرلينج">Dr. Julian Sterling</div>
+                <h3 data-en="Dr. Julian Sterling" data-ar="د. جوليان ستيرلينج">Dr. Julian Sterling</h3>
+                <span data-en="Advanced Facial Architect" data-ar="خبير نحت وتجميل الوجه">Advanced Facial Architect</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Magazine Testimonials -->
+    <section id="testimonials">
+        <div class="section-title">
+            <h2 data-en="The Journal Reviews" data-ar="آراء النخبة">The Journal Reviews</h2>
+            <p data-en="Experiences shared by our distinguished clientele" data-ar="تجارب حصرية من عملاء النخبة لدينا">Experiences shared by our distinguished clientele</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p data-en="“NOIRÉ represents an entirely new standard in medical aesthetics. The ambiance, precision, and privacy are simply unmatched anywhere else.”" data-ar="“تمثل نوار معياراً جديداً كلياً في طب التجميل. الأجواء، الدقة، والخصوصية متفوقة بشكل لا يُضاهى.”">“NOIRÉ represents an entirely new standard in medical aesthetics. The ambiance, precision, and privacy are simply unmatched anywhere else.”</p>
+                <div class="testimonial-author" data-en="— Victoria S., Investor" data-ar="— فيكتوريا س.، مستثمرة">— Victoria S., Investor</div>
+            </div>
+            <div class="testimonial-card">
+                <p data-en="“An extraordinary experience from start to finish. The medical board combines surgical excellence with true artistic refinement.”" data-ar="“تجربة استثنائية من البداية للنهاية. النخبة الطبية تجمع بين التميز الجراحي واللمس الفني الراقي.”">“An extraordinary experience from start to finish. The medical board combines surgical excellence with true artistic refinement.”</p>
+                <div class="testimonial-author" data-en="— Marcus K., Architect" data-ar="— ماركوس ك.، مهندس معماري">— Marcus K., Architect</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dark Glass Booking Form -->
+    <section id="booking" class="booking-section">
+        <div class="section-title">
+            <h2 data-en="Private Reservation" data-ar="حجز موعد خاص">Private Reservation</h2>
+            <p data-en="Secure your confidential consultation with our specialists" data-ar="احجز استشارتك السرية مع نخبة المتخصصين">Secure your confidential consultation with our specialists</p>
+        </div>
+        <div class="booking-form">
+            <form onsubmit="event.preventDefault(); alert('Thank you. We will contact you shortly to confirm your private session.');">
+                <div class="form-group">
+                    <label data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+                    <input type="text" class="form-control" required placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+                    <input type="tel" class="form-control" required placeholder="+20 ...">
+                </div>
+                <div class="form-group">
+                    <label data-en="Select Department" data-ar="القسم المطلوب">Select Department</label>
+                    <select class="form-control">
+                        <option data-en="Advanced Aesthetics" data-ar="التجميل المتقدم">Advanced Aesthetics</option>
+                        <option data-en="Dermatology & Laser" data-ar="الجلدية والليزر">Dermatology & Laser</option>
+                        <option data-en="Facial Architecture" data-ar="نحت وتجميل الوجه">Facial Architecture</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn" data-en="Confirm Reservation" data-ar="تأكيد الحجز">Confirm Reservation</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p data-en="© 2026 NOIRÉ CLINIC. All Rights Reserved. Luxury Night Medical." data-ar="© 2026 عيادة نوار. جميع الحقوق محفوظة. الرعاية الطبية الليلة الفاخرة.">© 2026 NOIRÉ CLINIC. All Rights Reserved. Luxury Night Medical.</p>
+    </footer>
+
+    <!-- Translation Script -->
+    <script>
+        let currentLang = 'en';
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const htmlRoot = document.getElementById('htmlRoot');
+            htmlRoot.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            htmlRoot.setAttribute('lang', currentLang);
+
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const text = el.getAttribute(`data-${currentLang}`);
+                if (text) {
+                    if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = text;
+                    } else {
+                        el.textContent = text;
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
